@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## define number of threads to use
-NCORE=8
+NCORE=4
 
 ## export more log messages
 set -x
