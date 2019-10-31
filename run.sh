@@ -7,7 +7,7 @@ NCORE=4
 set -x
 set -e
 
-mkdir mask
+mkdir -p mask
 
 ## raw inputs
 ANAT=`jq -r '.anat' config.json`
