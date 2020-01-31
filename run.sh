@@ -11,12 +11,19 @@ mkdir -p mask
 
 ## raw inputs
 ANAT=`jq -r '.anat' config.json`
+premasked=`jq -r '.premask' config.json`
 
 # convert anatomical t1 to mrtrix format
 [ ! -f anat.mif ] && mrconvert ${ANAT} anat.mif -nthreads $NCORE
 
 ## convert anatomy
-[ ! -f 5tt.mif ] && 5ttgen fsl anat.mif 5tt.mif -nocrop -sgm_amyg_hipp -tempdir ./tmp -force -nthreads $NCORE -quiet
+if [ ! -f 5tt.mif ]; then
+	if [[ ${premasked} == 'false' ]]; then
+		5ttgen fsl anat.mif 5tt.mif -nocrop -sgm_amyg_hipp -tempdir ./tmp -force -nthreads $NCORE -quiet
+	else
+		5ttgen fsl anat.mif 5tt.mif -premasked -nocrop -sgm_amyg_hipp -tempdir ./tmp -force -nthreads $NCORE -quiet
+	fi
+fi
 
 # 5 tissue type visualization
 [ ! -f ./mask/mask.nii.gz ] && mrconvert 5tt.mif -stride 1,2,3,4 ./mask/mask.nii.gz -force -nthreads $NCORE
