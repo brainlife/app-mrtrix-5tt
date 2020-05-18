@@ -48,7 +48,7 @@ You can submit this App online at [https://doi.org/10.25663/brainlife.app.239](h
 ```json 
 {
    "anat":    "testdata/anat/t1.nii.gz",
-    "premask":    false
+   "premask":    false
 } 
 ``` 
 
