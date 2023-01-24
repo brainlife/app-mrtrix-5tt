@@ -6,4 +6,4 @@
 time singularity exec -e docker://brainlife/mrtrix3:3.0.3 ./5tt.sh
 
 # convert gm, wm, csf masks
-time singularity exec -e docker://brainlife/3.0_RC3 ./binarize.sh
+time singularity exec -e docker://brainlife/mrtrix3:3.0_RC3 ./binarize.sh
