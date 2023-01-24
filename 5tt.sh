@@ -20,7 +20,7 @@ template=`jq -r '.input' config.json`
 
 # parse configs
 if [[ -f ${template} ]]; then
-	temp_line="-template $(eval "echo $template)"
+	temp_line="-template $(eval "echo $template")"
 else
 	temp_line=''
 fi
