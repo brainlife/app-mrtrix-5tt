@@ -37,19 +37,19 @@ else
 	thal_line=''
 fi
 
-if [[ ! ${white_stem} == '' ]]; then
+if [[ ! ${white_stem} == false ]]; then
 	ws_line='-white_stem'
 else
 	ws_line=''
 fi
 
-if [[ ! ${nocrop} == '' ]]; then
+if [[ ! ${nocrop} == false ]]; then
 	nc_line='-nocrop'
 else
 	nc_line=''
 fi
 
-if [[ ! ${sgm_amyg_hipp} == '' ]]; then
+if [[ ! ${sgm_amyg_hipp} == false ]]; then
 	sah_line='-sgm_amyg_hipp'
 else
 	sah_line=''
