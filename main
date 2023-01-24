@@ -3,5 +3,5 @@
 #PBS -N app-mrtrix3-5tt
 
 # generate 5tt
-time singularity exec -e docker://brainlife/mrtrix3:3.0.3 ./5tt.sh
+time singularity exec -e docker://brainlife/mrtrix3:3.0.3-fsr ./5tt.sh
 
