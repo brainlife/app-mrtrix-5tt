@@ -10,19 +10,41 @@ set -e
 mkdir -p mask
 
 ## raw inputs
-ANAT=`jq -r '.anat' config.json`
-premasked=`jq -r '.premask' config.json`
+freesurfer=`jq -r '.freesurfer' config.json`
+hippocampal=`jq -r '.hippocampal' config.json`
+thalami=`jq -r '.thalami' config.json`
+white_stem=`jq -r '.white_stem' config.json`
+nocrop=`jq -r '.nocrop' config.json`
+sgm_amyg_hipp=`jq -r '.sgm_amyg_hipp' config.json`
 
-# convert anatomical t1 to mrtrix format
-[ ! -f anat.mif ] && mrconvert ${ANAT} anat.mif -nthreads $NCORE
+# parse configs
+if [[ ! ${hippocampal} == '' ]]; then
+	hipp_line='-hippocampal ${hippocampal}'
+else
+	hipp_line=''
+fi
+
+if [[ ! ${thalami} == '' ]]; then
+	thal_line='-thalami ${thalami}'
+else
+	thal_line=''
+fi
+
+if [[ ! ${white_stem} == '' ]]; then
+	ws_line='-white_stem'
+fi
+
+if [[ ! ${nocrop} == '' ]]; then
+	nc_line='-nocrop'
+fi
+
+if [[ ! ${sgm_amyg_hipp} == '' ]]; then
+	sah_line='-sgm_amyg_hipp'
+fi
 
 ## convert anatomy
 if [ ! -f 5tt.mif ]; then
-	if [[ ${premasked} == 'false' ]]; then
-		5ttgen fsl anat.mif 5tt.mif -nocrop -sgm_amyg_hipp -tempdir ./tmp -force -nthreads $NCORE -quiet
-	else
-		5ttgen fsl anat.mif 5tt.mif -premasked -nocrop -sgm_amyg_hipp -tempdir ./tmp -force -nthreads $NCORE -quiet
-	fi
+	5ttgen hsvs ${freesurfer} 5tt.mif ${hipp_line} ${thal_line} ${ws_line} ${nc_line} ${sah_line} -force -nthreads $NCORE -quiet
 fi
 
 # 5 tissue type visualization
