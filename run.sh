@@ -21,6 +21,8 @@ template=`jq -r '.input' config.json`
 # parse configs
 if [[ -f ${template} ]]; then
 	temp_line='-template ${template}'
+else
+	temp_line=''
 
 if [[ ! ${hippocampal} == '' ]]; then
 	hipp_line='-hippocampal ${hippocampal}'
