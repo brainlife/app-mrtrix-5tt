@@ -20,19 +20,19 @@ template=`jq -r '.input' config.json`
 
 # parse configs
 if [[ -f ${template} ]]; then
-	temp_line='-template ${template}'
+	temp_line="-template $(eval "echo $template)"
 else
 	temp_line=''
 fi
 
 if [[ ! ${hippocampal} == '' ]]; then
-	hipp_line='-hippocampal ${hippocampal}'
+	hipp_line="-hippocampal $(eval "echo $hippocampal")"
 else
 	hipp_line=''
 fi
 
 if [[ ! ${thalami} == '' ]]; then
-	thal_line='-thalami ${thalami}'
+	thal_line="-thalami $(eval "echo $thalami")"
 else
 	thal_line=''
 fi
