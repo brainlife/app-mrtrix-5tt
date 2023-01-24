@@ -26,7 +26,7 @@ else
 fi
 
 if [[ ! ${hippocampal} == '' ]]; then
-	hipp_line="-hippocampal $(eval "echo $hippocampal")"
+	hipp_line="-hippocampi $(eval "echo $hippocampal")"
 else
 	hipp_line=''
 fi
