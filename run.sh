@@ -16,8 +16,12 @@ thalami=`jq -r '.thalami' config.json`
 white_stem=`jq -r '.white_stem' config.json`
 nocrop=`jq -r '.nocrop' config.json`
 sgm_amyg_hipp=`jq -r '.sgm_amyg_hipp' config.json`
+template=`jq -r '.input' config.json`
 
 # parse configs
+if [[ -f ${template} ]]; then
+	temp_line='-template ${template}'
+
 if [[ ! ${hippocampal} == '' ]]; then
 	hipp_line='-hippocampal ${hippocampal}'
 else
@@ -44,7 +48,7 @@ fi
 
 ## convert anatomy
 if [ ! -f 5tt.mif ]; then
-	5ttgen hsvs ${freesurfer} 5tt.mif ${hipp_line} ${thal_line} ${ws_line} ${nc_line} ${sah_line} -force -nthreads $NCORE -quiet
+	5ttgen hsvs ${freesurfer} 5tt.mif ${temp_line} ${hipp_line} ${thal_line} ${ws_line} ${nc_line} ${sah_line} -force -nthreads $NCORE -quiet
 fi
 
 # 5 tissue type visualization
