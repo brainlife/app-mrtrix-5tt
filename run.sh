@@ -23,6 +23,7 @@ if [[ -f ${template} ]]; then
 	temp_line='-template ${template}'
 else
 	temp_line=''
+fi
 
 if [[ ! ${hippocampal} == '' ]]; then
 	hipp_line='-hippocampal ${hippocampal}'
@@ -38,14 +39,20 @@ fi
 
 if [[ ! ${white_stem} == '' ]]; then
 	ws_line='-white_stem'
+else
+	ws_line=''
 fi
 
 if [[ ! ${nocrop} == '' ]]; then
 	nc_line='-nocrop'
+else
+	nc_line=''
 fi
 
 if [[ ! ${sgm_amyg_hipp} == '' ]]; then
 	sah_line='-sgm_amyg_hipp'
+else
+	sah_line=''
 fi
 
 ## convert anatomy
